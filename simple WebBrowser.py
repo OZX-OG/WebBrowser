@@ -58,7 +58,7 @@ class MyWebBrowser():
 
         self.browser = QWebEngineView()
 
-        self.url_bar.returnPressed.connect(lambda: self.navigate(self.url_bar.text()))
+        self.url_bar.returnPressed.connect(lambda: self.navigate_enter(self.url_bar.text()))
         self.go_btn.clicked.connect(lambda: self.navigate(self.url_bar.text()))
         self.back_btn.clicked.connect(self.browser.back)
         self.forward_btn.clicked.connect(self.browser.forward)
@@ -73,7 +73,20 @@ class MyWebBrowser():
         self.window.setLayout(self.layout)
         self.window.show()
 
+    def navigate_enter(self, url):
+        if self.url_bar.text() == "" or self.url_bar.text() == "http://.com":
+            url = "https://youtube.com"
+            self.url_bar.setText(url)
 
+        if not url.startswith("http"):
+            url = "http://" + url
+            self.url_bar.setText(url)
+
+        if not url[-4] == "." and not url[-3] == ".":
+            url = url + ".com"
+            self.url_bar.setText(url)
+            
+        self.browser.setUrl(QUrl(url))
 
     def navigate(self, url):
         if self.url_bar.text() == "" or self.url_bar.text() == "http://.com":
