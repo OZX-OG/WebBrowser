@@ -83,10 +83,6 @@ class MyWebBrowser():
         if not url.startswith("http"):
             url = "http://" + url
             self.url_bar.setText(url)
-
-        if not url[-4] == "." and not url[-3] == ".":
-            url = url + ".com"
-            self.url_bar.setText(url)
             
         self.browser.setUrl(QUrl(url))
 
