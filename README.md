@@ -1,2 +1,2 @@
-# WebBrowser
-simple Web Browser
+# simple Web Browser
+made by qt5
